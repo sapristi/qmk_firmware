@@ -1,0 +1,59 @@
+[legends]
+
+KC_SCLN=; :
+KC_SLSH=/ ?
+KC_MINS=- _
+KC_QUOT=' "
+KC_PIPE=| \
+KC_COMM=, <
+KC_DOT=. >
+KC_BSLS=| \
+
+KC_BSPC=←─
+KC_TAB=⇆
+KC_LSFT=L⇧
+KC_RSFT=R⇧
+KC_RALT=AltGr
+KC_LALT=Alt
+MOD_LALT=Alt
+MOD_LCTL=LCTL
+
+KC_LEFT=←
+KC_RGHT=→
+KC_UP=↑
+KC_DOWN=↓
+
+KC_EQL== +
+KC_AMPR=&
+KC_PERC=%
+KC_PLUS=+
+KC_ASTR=*
+KC_TILD=~
+KC_HASH=#
+KC_EXLM=!
+KC_AT=@
+KC_DLR=$
+KC_CIRC=^
+KC_GRV=`
+KC_DQT="
+KC_UNDS=_
+
+KC_LPRN=(
+KC_RPRN=)
+KC_LCBR={
+KC_RCBR=}
+KC_LBRC=[
+KC_RBRC=]
+
+_RAISE=_RSE
+_LOWER=_LWR
+_ADJUST=_ADJ
+
+HOME_A=A / G
+HOME_S=S / A
+HOME_D=D / C
+HOME_F=F / S
+HOME_J=J / S
+HOME_K=K / C
+HOME_L=L / A
+HOME_SCLN=; / G
