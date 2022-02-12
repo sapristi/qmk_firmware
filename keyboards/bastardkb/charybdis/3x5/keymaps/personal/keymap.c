@@ -16,64 +16,10 @@
  */
 #include QMK_KEYBOARD_H
 
-enum charybdis_keymap_layers {
-    LAYER_BASE = 0,
-    _SYM,
-    _NAV,
-    _NUM,
-    _ADJ
-};
 
 
-/* thumb mod tap */
-#define SFT_SPC MT(MOD_LSFT, KC_SPC)
-#define NAV_ENT LT(_NAV, KC_ENT)
-#define NUM_BSP LT(_NUM, KC_BSPC)
-#define SYM_ESC LT(_SYM, KC_ESC)
-#define ALT_TAB MT(MOD_LALT, KC_TAB)
 
-/* Layers */
-#define L_SYM MO(_SYM)
-#define L_NAV MO(_NAV)
-#define L_NUM MO(_NUM)
-#define L_ADJ MO(_ADJ)
-
-/* AltGr accents */
-#define AC_AIGU RALT(KC_QUOT)
-#define AC_GRAV RALT(KC_GRV)
-#define AC_CIRC RALT(KC_6)
-
-/* accented */
-#define AC_E_AI RALT(KC_E)
-#define AC_C_CE RALT(KC_COMM)
-#define KC_EURO RALT(KC_5)
-
-
-/* home row mods /\ mods order */
-#define HMT_1 LGUI_T
-#define HMT_2 LCTL_T
-#define HMT_3 LSFT_T
-#define HMT_4 LALT_T
-
-#define HM_1 KC_LGUI
-#define HM_2 KC_LCTL
-#define HM_3 KC_LSFT
-#define HM_4 KC_LALT
-
-/* home row mods */
-#define HOME_A HMT_1(KC_A)
-#define HOME_S HMT_2(KC_S)
-#define HOME_D HMT_3(KC_D)
-#define HOME_F HMT_4(KC_F)
-
-// Right-hand home row mods
-#define HOME_J HMT_4(KC_J)
-#define HOME_K HMT_3(KC_K)
-#define HOME_L HMT_2(KC_L)
-#define HOME_SCLN HMT_1(KC_SCLN)
-
-
-// clang-format off
+/* // clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_charybdis_3x5(
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
@@ -89,11 +35,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_charybdis_3x5(
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
-       _______, AC_C_CE, AC_E_AI, KC_LCBR, KC_RCBR,    KC_DQT,  KC_QUOT, KC_GRV,  KC_CIRC, AC_GRAV,
+       AC_E_AI, AC_C_CE, KC_LCBR, KC_RCBR, _______,    AC_CIRC, AC_AIGU, AC_AIGU, AC_GRAV, _______,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-       HM_1,    HM_2,    HM_3,    KC_LPRN, KC_RPRN,    _______, _______, _______, _______, AC_AIGU,
+       KC_LSFT, _______, KC_LPRN, KC_RPRN, _______,    KC_CIRC, KC_QUOT, KC_DQT,  KC_GRV,  _______,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-       DRGSCRL, _______, _______, KC_LBRC, KC_RBRC,    KC_BSLS, KC_BTN1, KC_BTN2, KC_BTN3, AC_CIRC,
+       DRGSCRL, _______, KC_LBRC, KC_RBRC, _______,    _______, KC_BTN1, KC_BTN2, KC_BTN3, _______,
   // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
                          _______, _______, _______,    _______, _______
   //                   ╰───────────────────────────╯ ╰──────────────────╯
@@ -105,14 +51,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
        HM_1,    HM_2,    HM_3,    HM_4,    _______,    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-       RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_MOD,    KC_DEL,  _______, _______, _______, _______,
+       KC_BRIU, KC_BRID, _______, _______, _______,    KC_DEL,  _______, _______, _______, _______,
   // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
-                         _______, _______, _______,    _______, _______
+                         _______, _______, L_ADJ,    _______, _______
   //                   ╰───────────────────────────╯ ╰──────────────────╯
   ),
   [_NUM] = LAYOUT_charybdis_3x5(
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
-      _______, _______, _______, _______, _______,     KC_EQL,  KC_7,    KC_8,    KC_9,    KC_SLSH,
+      _______, _______, _______, _______, _______,     KC_EQL,  KC_7,    KC_8,    KC_9,    KC_QUOT,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
        HM_1,    HM_2,    HM_3,    HM_4,    _______,    KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
@@ -121,6 +67,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          _______, _______, _______,    _______, _______
   //                   ╰───────────────────────────╯ ╰──────────────────╯
                                 ),
+  [_ADJ] = LAYOUT_charybdis_3x5(
+  // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
+       KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, XXXXXXX,    KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,
+  // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
+       XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX,    KC_F6,   KC_F7,   KC_F8,    KC_F9,   KC_F10,
+  // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
+       RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_MOD,    KC_F11, KC_F12,   XXXXXXX, XXXXXXX, XXXXXXX,
+  // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
+                         _______, _______, _______,    _______, _______
+  //                   ╰───────────────────────────╯ ╰──────────────────╯
+                  )
 
 };
 // clang-format on
