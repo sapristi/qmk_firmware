@@ -17,6 +17,29 @@
 #include QMK_KEYBOARD_H
 
 
+#define SLH_MOU LT(_MOU, KC_SLSH)
+
+enum userspace_keycodes {
+    SCLN_DRG = CHARYBDIS_SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static uint16_t my_hash_timer;
+    switch (keycode) {
+    case SCLN_DRG:
+        if(record->event.pressed) {
+            my_hash_timer = timer_read();
+            charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
+        } else {
+            charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
+            if (timer_elapsed(my_hash_timer) < TAPPING_TERM) {
+                SEND_STRING(";"); // Change the character(s) to be sent on tap here
+            }
+        }
+        return false; // We handled this keypress
+    }
+    return true; // We didn't handle other keypresses
+}
 
 
 /* // clang-format off */
@@ -25,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
           KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-        HOME_A,  HOME_S,  HOME_D,  HOME_F,    KC_G,       KC_H,  HOME_J,  HOME_K,  HOME_L,HOME_SCLN,
+        HOME_A,  HOME_S,  HOME_D,  HOME_F,    KC_G,       KC_H,  HOME_J,  HOME_K,  HOME_L,SCLN_DRG,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
+          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, SLH_MOU,
   // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
                          ALT_TAB, SFT_SPC, SYM_ESC,    NUM_BSP, NAV_ENT
   //                   ╰───────────────────────────╯ ╰──────────────────╯
@@ -35,11 +58,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_charybdis_3x5(
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
-       AC_E_AI, AC_C_CE, KC_LCBR, KC_RCBR, _______,    AC_CIRC, AC_AIGU, AC_AIGU, AC_GRAV, _______,
+       _______, KC_EURO, KC_LCBR, KC_RCBR, _______,    AC_CIRC, AC_AIGU, AC_E_AI, AC_GRAV, AC_C_CE,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-       KC_LSFT, _______, KC_LPRN, KC_RPRN, _______,    KC_CIRC, KC_QUOT, KC_DQT,  KC_GRV,  _______,
+       KC_LSFT, _______, KC_LPRN, KC_RPRN, _______,    KC_CIRC, KC_QUOT, KC_DQT,  KC_GRV,  KC_BSLS,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
-       DRGSCRL, _______, KC_LBRC, KC_RBRC, _______,    _______, KC_BTN1, KC_BTN2, KC_BTN3, _______,
+       DRGSCRL, _______, KC_LBRC, KC_RBRC, _______,    _______, KC_BTN1, KC_BTN3, KC_BTN2, _______,
   // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
                          _______, _______, _______,    _______, _______
   //                   ╰───────────────────────────╯ ╰──────────────────╯
@@ -77,7 +100,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
                          _______, _______, _______,    _______, _______
   //                   ╰───────────────────────────╯ ╰──────────────────╯
-                  )
+                                ),
+  [_MOU] = LAYOUT_charybdis_3x5(
+  // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
+      _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+  // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
+      _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______,
+  // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
+      _______, _______, _______, _______, _______,    _______, KC_BTN1, KC_BTN3, KC_BTN2, _______,
+  // ╰─────────────────────────────────────────────┤ ├─────────────────────────────────────────────╯
+                        _______, _______, _______,    _______, _______
+  //                   ╰───────────────────────────╯ ╰──────────────────╯
+                                ),
 
 };
 // clang-format on
