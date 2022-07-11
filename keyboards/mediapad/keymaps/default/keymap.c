@@ -9,12 +9,16 @@ enum layer_names {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
     [_BASE] = LAYOUT(
-                     KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE,  KC_MEDIA_NEXT_TRACK, KC_F13,
-                     KC_F14,   KC_F15, KC_F16,
-                     KC_KB_MUTE
+                     KC_F1, KC_F2, KC_F3, KC_F4,
+                     KC_F5, KC_F6, KC_F7,
+                     KC_F8
     )
+    /* [_BASE] = LAYOUT( */
+    /*                  KC_A, KC_B, KC_C, KC_D, */
+    /*                  KC_E, KC_F, KC_G, */
+    /*                  KC_H */
+    /*                  ) */
 };
 
 bool encoder_update_kb(uint8_t index, bool clockwise) {
@@ -22,9 +26,9 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     // default layer
     else {
         if (clockwise) {
-            tap_code(KC_KB_VOLUME_UP);
+            tap_code(KC_F9);
         } else {
-            tap_code(KC_KB_VOLUME_DOWN);
+            tap_code(KC_F10);
         }
     }
     return true;
