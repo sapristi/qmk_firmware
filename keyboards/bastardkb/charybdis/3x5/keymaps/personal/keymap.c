@@ -20,7 +20,17 @@
 #define SLH_MOU LT(_MOU, KC_SLSH)
 
 enum userspace_keycodes {
-    SCLN_DRG = CHARYBDIS_SAFE_RANGE,
+    /* SCLN_DRG = CHARYBDIS_SAFE_RANGE, */
+    SCLN_DRG = SAFE_RANGE,
+};
+
+enum layers {
+    _QWERTY = 0,
+    _SYM,
+    _NAV,
+    _NUM,
+    _ADJ,
+    _MOU
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -44,7 +54,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 /* // clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [LAYER_BASE] = LAYOUT_charybdis_3x5(
+  [_QWERTY] = LAYOUT_charybdis_3x5(
   // ╭─────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮
           KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
   // ├─────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤
@@ -114,20 +124,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 ),
 
 };
-// clang-format on
-#ifdef RGB_MATRIX_ENABLE
-// Forward-declare this helper function since it is defined in rgb_matrix.c.
-void rgb_matrix_update_pwm_buffers(void);
-#endif
+/* // clang-format on */
+/* #ifdef RGB_MATRIX_ENABLE */
+/* // Forward-declare this helper function since it is defined in rgb_matrix.c. */
+/* void rgb_matrix_update_pwm_buffers(void); */
+/* #endif */
 
-void shutdown_user(void) {
-#ifdef RGBLIGHT_ENABLE
-    rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_setrgb_red();
-#endif  // RGBLIGHT_ENABLE
-#ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_set_color_all(RGB_RED);
-    rgb_matrix_update_pwm_buffers();
-#endif  // RGB_MATRIX_ENABLE
-}
+/* void shutdown_user(void) { */
+/* #ifdef RGBLIGHT_ENABLE */
+/*     rgblight_enable_noeeprom(); */
+/*     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT); */
+/*     rgblight_setrgb_red(); */
+/* #endif  // RGBLIGHT_ENABLE */
+/* #ifdef RGB_MATRIX_ENABLE */
+/*     rgb_matrix_set_color_all(RGB_RED); */
+/*     rgb_matrix_update_pwm_buffers(); */
+/* #endif  // RGB_MATRIX_ENABLE */
+/* } */
